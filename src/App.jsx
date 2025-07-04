@@ -43,6 +43,12 @@ function App() {
   const [editingInvoice, setEditingInvoice] = useState(null)
   const [taxRate, setTaxRate] = useState(20) // Default 20%
   const [showTaxSettings, setShowTaxSettings] = useState(false)
+  const [taxDueDates, setTaxDueDates] = useState({
+    q1: '04-15',
+    q2: '06-15', 
+    q3: '09-15',
+    q4: '01-15'
+  })
   const [newHours, setNewHours] = useState({
     date: format(new Date(), 'yyyy-MM-dd'),
     hours: '',
@@ -66,6 +72,7 @@ function App() {
     const savedAppPassword = localStorage.getItem('appPassword')
     const savedLastBackup = localStorage.getItem('lastBackup')
     const savedManagerEmail = localStorage.getItem('managerEmail')
+    const savedTaxDueDates = localStorage.getItem('taxDueDates')
     
     if (savedHours) setHours(JSON.parse(savedHours))
     if (savedInvoices) setInvoices(JSON.parse(savedInvoices))
@@ -74,6 +81,7 @@ function App() {
     if (savedAppPassword) setAppPassword(savedAppPassword)
     if (savedLastBackup) setLastBackup(new Date(savedLastBackup))
     if (savedManagerEmail) setManagerEmail(savedManagerEmail)
+    if (savedTaxDueDates) setTaxDueDates(JSON.parse(savedTaxDueDates))
     
     // Check if app password is set
     if (savedAppPassword) {
@@ -128,6 +136,12 @@ function App() {
       localStorage.setItem('managerEmail', managerEmail)
     }
   }, [managerEmail])
+
+  useEffect(() => {
+    if (taxDueDates) {
+      localStorage.setItem('taxDueDates', JSON.stringify(taxDueDates))
+    }
+  }, [taxDueDates])
 
   const checkBackupReminder = () => {
     if (!lastBackup) {
@@ -548,7 +562,7 @@ Thanks!
       <div className="min-h-screen bg-lumiere-ivory flex items-center justify-center">
         <div className="max-w-md w-full space-y-8 p-8">
           <div className="text-center">
-            <ShieldCheckIcon className="mx-auto h-12 w-12 text-lumiere-burgundy" />
+            <ShieldCheckIcon className="mx-auto h-12 w-12 text-lumiere-sage" />
             <h2 className="mt-6 text-3xl font-bold text-lumiere-navy">
               {appPassword ? 'Enter Password' : 'Set App Password'}
             </h2>
@@ -579,8 +593,8 @@ Thanks!
 
   return (
     <div className="min-h-screen bg-lumiere-ivory">
-      <div className="container py-8">
-        <div className="mb-8">
+      <div className="container py-6">
+        <div className="mb-6">
           <div className="mobile-first justify-between items-start space-y-4 sm:space-y-0">
             <div>
               <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-lumiere-navy mb-4">Contractor Tracker App</h1>
@@ -619,9 +633,9 @@ Thanks!
 
         {/* Backup Reminder */}
         {showBackupReminder && (
-          <div className="bg-lumiere-grey border border-lumiere-gold rounded-lg p-4 mb-8">
+          <div className="bg-lumiere-grey border border-lumiere-gold rounded-lg p-4 mb-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0">
-              <ExclamationTriangleIcon className="h-6 w-6 text-lumiere-burgundy mr-3 flex-shrink-0" />
+              <ExclamationTriangleIcon className="h-6 w-6 text-lumiere-sage mr-3 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-medium text-lumiere-navy">Backup Reminder</h3>
                 <p className="text-sm text-lumiere-navy opacity-80 mt-1">
@@ -634,7 +648,7 @@ Thanks!
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
                 <button
                   onClick={() => setShowBackupReminder(false)}
-                  className="text-sm text-lumiere-burgundy hover:text-lumiere-navy transition-colors"
+                  className="text-sm text-lumiere-sage hover:text-lumiere-navy transition-colors"
                 >
                   Remind Later
                 </button>
@@ -650,10 +664,10 @@ Thanks!
         )}
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="card">
             <div className="flex items-center">
-              <ClockIcon className="h-8 w-8 text-lumiere-burgundy flex-shrink-0" />
+              <ClockIcon className="h-8 w-8 text-lumiere-sage flex-shrink-0" />
               <div className="ml-4 min-w-0">
                 <p className="text-sm font-body font-semibold text-lumiere-navy opacity-70">Total Hours</p>
                 <p className="text-2xl font-heading font-bold text-lumiere-navy">
@@ -677,7 +691,7 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <DocumentTextIcon className="h-8 w-8 text-lumiere-burgundy flex-shrink-0" />
+              <DocumentTextIcon className="h-8 w-8 text-lumiere-sage flex-shrink-0" />
               <div className="ml-4 min-w-0">
                 <p className="text-sm font-body font-semibold text-lumiere-navy opacity-70">Pending Approval</p>
                 <p className="text-2xl font-heading font-bold text-lumiere-navy">{pendingHours.length}</p>
@@ -698,7 +712,7 @@ Thanks!
         </div>
 
         {/* Client Management */}
-        <div className="card mb-8">
+        <div className="card mb-6">
           <div className="mobile-first justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
             <h2 className="font-heading text-2xl lg:text-3xl text-lumiere-navy">Client Management</h2>
             <button
@@ -1196,41 +1210,53 @@ Thanks!
 
         {/* Tax Summary */}
         <div className="card">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Quarterly Tax Summary</h2>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="font-heading text-2xl lg:text-3xl text-lumiere-navy">Quarterly Tax Summary</h2>
             <button
               onClick={() => setShowTaxSettings(true)}
-              className="btn-secondary flex items-center text-sm"
+              className="btn-secondary"
             >
-              <PencilIcon className="h-4 w-4 mr-1" />
-              Edit Tax Rate
+              <PencilIcon className="h-5 w-5" />
+              <span>Edit Tax Settings</span>
             </button>
           </div>
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">Current Quarter</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-600 text-sm sm:text-base">Total Earnings:</span>
-                  <span className="font-medium text-sm sm:text-base">${totalEarnings.toFixed(2)}</span>
+              <h3 className="font-heading text-xl text-lumiere-navy mb-4">Current Quarter</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-base text-lumiere-navy opacity-80">Total Earnings:</span>
+                  <span className="font-body font-semibold text-base">${totalEarnings.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600 text-sm sm:text-base">Taxes ({taxRate}%):</span>
-                  <span className="font-medium text-red-600 text-sm sm:text-base">${taxAmount.toFixed(2)}</span>
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-base text-lumiere-navy opacity-80">Taxes ({taxRate}%):</span>
+                  <span className="font-body font-semibold text-base text-lumiere-sage">${taxAmount.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between border-t pt-2">
-                  <span className="text-gray-900 font-medium text-sm sm:text-base">Net Income:</span>
-                  <span className="font-medium text-green-600 text-sm sm:text-base">${(totalEarnings - taxAmount).toFixed(2)}</span>
+                <div className="flex justify-between items-center border-t border-lumiere-gold pt-3">
+                  <span className="font-body font-semibold text-base text-lumiere-navy">Net Income:</span>
+                  <span className="font-body font-semibold text-base text-lumiere-sage">${(totalEarnings - taxAmount).toFixed(2)}</span>
                 </div>
               </div>
             </div>
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">Tax Due Dates</h3>
-              <div className="text-xs sm:text-sm text-gray-600 space-y-1">
-                <p>Q1: April 15</p>
-                <p>Q2: June 15</p>
-                <p>Q3: September 15</p>
-                <p>Q4: January 15</p>
+              <h3 className="font-heading text-xl text-lumiere-navy mb-4">Tax Due Dates</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-base text-lumiere-navy opacity-80">Q1:</span>
+                  <span className="font-body font-semibold text-base">{taxDueDates.q1}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-base text-lumiere-navy opacity-80">Q2:</span>
+                  <span className="font-body font-semibold text-base">{taxDueDates.q2}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-base text-lumiere-navy opacity-80">Q3:</span>
+                  <span className="font-body font-semibold text-base">{taxDueDates.q3}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-base text-lumiere-navy opacity-80">Q4:</span>
+                  <span className="font-body font-semibold text-base">{taxDueDates.q4}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1239,51 +1265,109 @@ Thanks!
         {/* Tax Settings Modal */}
         {showTaxSettings && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Tax Settings</h3>
+            <div className="bg-white rounded-lg p-6 max-w-lg w-full">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-heading font-semibold text-lumiere-navy">Tax Settings</h3>
                 <button
                   onClick={() => setShowTaxSettings(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-lumiere-navy hover:text-lumiere-sage transition-colors"
                 >
                   <XMarkIcon className="h-6 w-6" />
                 </button>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
+                {/* Tax Rate Section */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-body font-semibold text-lumiere-navy mb-2">
                     Tax Rate (%)
                   </label>
                   <input
                     type="number"
                     value={taxRate}
                     onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
-                    className="input-field w-full"
+                    className="input-field"
                     min="0"
                     max="100"
                     step="0.1"
                     placeholder="20"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-lumiere-navy opacity-70 mt-2">
                     Enter your estimated tax rate (e.g., 20 for 20%)
                   </p>
                 </div>
+
+                {/* Tax Due Dates Section */}
+                <div>
+                  <label className="block text-sm font-body font-semibold text-lumiere-navy mb-4">
+                    Tax Due Dates (MM-DD format)
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-body font-semibold text-lumiere-navy mb-1">Q1</label>
+                      <input
+                        type="text"
+                        value={taxDueDates.q1}
+                        onChange={(e) => setTaxDueDates({...taxDueDates, q1: e.target.value})}
+                        className="input-field"
+                        placeholder="04-15"
+                        pattern="[0-9]{2}-[0-9]{2}"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-body font-semibold text-lumiere-navy mb-1">Q2</label>
+                      <input
+                        type="text"
+                        value={taxDueDates.q2}
+                        onChange={(e) => setTaxDueDates({...taxDueDates, q2: e.target.value})}
+                        className="input-field"
+                        placeholder="06-15"
+                        pattern="[0-9]{2}-[0-9]{2}"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-body font-semibold text-lumiere-navy mb-1">Q3</label>
+                      <input
+                        type="text"
+                        value={taxDueDates.q3}
+                        onChange={(e) => setTaxDueDates({...taxDueDates, q3: e.target.value})}
+                        className="input-field"
+                        placeholder="09-15"
+                        pattern="[0-9]{2}-[0-9]{2}"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-body font-semibold text-lumiere-navy mb-1">Q4</label>
+                      <input
+                        type="text"
+                        value={taxDueDates.q4}
+                        onChange={(e) => setTaxDueDates({...taxDueDates, q4: e.target.value})}
+                        className="input-field"
+                        placeholder="01-15"
+                        pattern="[0-9]{2}-[0-9]{2}"
+                      />
+                    </div>
+                  </div>
+                  <p className="text-xs text-lumiere-navy opacity-70 mt-2">
+                    Use MM-DD format (e.g., 04-15 for April 15th)
+                  </p>
+                </div>
                 
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-2">Preview</h4>
-                  <div className="space-y-1 text-sm">
+                {/* Preview Section */}
+                <div className="bg-lumiere-grey p-4 rounded-lg border border-lumiere-gold">
+                  <h4 className="font-body font-semibold text-lumiere-navy mb-3">Preview</h4>
+                  <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span>Total Earnings:</span>
-                      <span>${totalEarnings.toFixed(2)}</span>
+                      <span className="font-body">Total Earnings:</span>
+                      <span className="font-body font-semibold">${totalEarnings.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Tax Rate:</span>
-                      <span>{taxRate}%</span>
+                      <span className="font-body">Tax Rate:</span>
+                      <span className="font-body font-semibold">{taxRate}%</span>
                     </div>
-                    <div className="flex justify-between font-medium">
-                      <span>Estimated Tax:</span>
-                      <span className="text-red-600">${(totalEarnings * (taxRate / 100)).toFixed(2)}</span>
+                    <div className="flex justify-between font-medium border-t border-lumiere-gold pt-2">
+                      <span className="font-body">Estimated Tax:</span>
+                      <span className="font-body font-semibold text-lumiere-sage">${(totalEarnings * (taxRate / 100)).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -1292,13 +1376,13 @@ Thanks!
               <div className="flex justify-end space-x-3 mt-6">
                 <button
                   onClick={() => setShowTaxSettings(false)}
-                  className="btn-secondary text-sm"
+                  className="btn-secondary"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => setShowTaxSettings(false)}
-                  className="btn-primary text-sm"
+                  className="btn-primary"
                 >
                   Save Settings
                 </button>
@@ -1309,7 +1393,7 @@ Thanks!
       </div>
       
       {/* Footer */}
-      <footer className="bg-lumiere-navy text-lumiere-ivory py-8 mt-16">
+      <footer className="bg-lumiere-navy text-lumiere-ivory py-6 mt-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-sm text-lumiere-ivory opacity-80 mb-2">
@@ -1324,8 +1408,9 @@ Thanks!
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block mt-2 text-lumiere-gold hover:text-lumiere-sage transition-colors"
-            >The Wednesday Collective
-            </a> family of initiatives
+            >
+              The Wednesday Collective
+              </a> family of initiatives
             </p>
           </div>
         </div>

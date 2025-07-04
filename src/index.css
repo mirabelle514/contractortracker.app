@@ -95,8 +95,8 @@
 
   /* Buttons */
   .btn-primary {
-    background-color: var(--lumiere-burgundy);
-    color: var(--lumiere-ivory);
+    background-color: var(--lumiere-sage);
+    color: var(--lumiere-navy);
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 1rem;
@@ -113,13 +113,13 @@
   }
   
   .btn-primary:hover {
-    background-color: #6a2a3e;
+    background-color: #95a88a;
     transform: translateY(-1px);
   }
   
   .btn-primary:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(124, 48, 72, 0.3);
+    box-shadow: 0 0 0 3px rgba(166, 184, 154, 0.3);
   }
   
   .btn-secondary {
@@ -154,7 +154,7 @@
   .input-field {
     width: 100%;
     min-height: 48px;
-    padding: var(--spacing-2) var(--spacing-3);
+    padding: 16px 20px;
     border: 1px solid var(--lumiere-gold);
     border-radius: var(--spacing-2);
     background-color: var(--lumiere-ivory);
@@ -162,12 +162,17 @@
     font-family: var(--font-body);
     font-size: 1rem;
     transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  
+  .input-field.w-32 {
+    width: 8rem;
   }
   
   .input-field:focus {
     outline: none;
-    border-color: var(--lumiere-burgundy);
-    box-shadow: 0 0 0 3px rgba(124, 48, 72, 0.1);
+    border-color: var(--lumiere-sage);
+    box-shadow: 0 0 0 3px rgba(166, 184, 154, 0.1);
   }
   
   .input-field::placeholder {
@@ -182,7 +187,7 @@
     box-shadow: 0 4px 6px -1px rgba(34, 48, 74, 0.1);
     padding: var(--spacing-6);
     border: 1px solid var(--lumiere-gold);
-    margin-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
   }
   
   .card-header {
@@ -190,7 +195,7 @@
     color: var(--lumiere-ivory);
     padding: var(--spacing-4) var(--spacing-6);
     border-radius: var(--spacing-2) var(--spacing-2) 0 0;
-    margin: calc(-1 * var(--spacing-6)) calc(-1 * var(--spacing-6)) var(--spacing-4) calc(-1 * var(--spacing-6));
+    margin: calc(-1 * var(--spacing-6)) calc(-1 * var(--spacing-6)) var(--spacing-6) calc(-1 * var(--spacing-6));
     font-family: var(--font-heading);
   }
   
@@ -215,7 +220,7 @@
   
   /* Utility Classes */
   .text-primary {
-    color: var(--lumiere-burgundy);
+    color: var(--lumiere-sage);
   }
   
   .text-secondary {
@@ -223,7 +228,7 @@
   }
   
   .bg-primary {
-    background-color: var(--lumiere-burgundy);
+    background-color: var(--lumiere-sage);
   }
   
   .bg-secondary {
@@ -260,7 +265,7 @@
   
   /* Focus styles for accessibility */
   *:focus {
-    outline: 2px solid var(--lumiere-burgundy);
+    outline: 2px solid var(--lumiere-sage);
     outline-offset: 2px;
   }
   
@@ -268,7 +273,7 @@
   input:focus,
   select:focus,
   textarea:focus {
-    outline: 2px solid var(--lumiere-burgundy);
+    outline: 2px solid var(--lumiere-sage);
     outline-offset: 2px;
   }
 }
