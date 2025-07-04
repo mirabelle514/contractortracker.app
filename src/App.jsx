@@ -579,12 +579,12 @@ Thanks!
 
   return (
     <div className="min-h-screen bg-lumiere-ivory">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="container py-8">
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0">
+          <div className="mobile-first justify-between items-start space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-lumiere-navy mb-2">Contractor Tracker App</h1>
-              <p className="text-lumiere-navy text-sm sm:text-base opacity-80">Track your hours, create invoices, and manage taxes</p>
+              <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-lumiere-navy mb-4">Contractor Tracker App</h1>
+              <p className="font-body text-base lg:text-lg text-lumiere-navy opacity-80">Track your hours, create invoices, and manage taxes</p>
             </div>
             <div className="flex flex-wrap gap-2 w-full sm:w-auto">
               <button
@@ -650,13 +650,13 @@ Thanks!
         )}
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="card">
             <div className="flex items-center">
-              <ClockIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-burgundy flex-shrink-0" />
-              <div className="ml-3 sm:ml-4 min-w-0">
-                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Total Hours</p>
-                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">
+              <ClockIcon className="h-8 w-8 text-lumiere-burgundy flex-shrink-0" />
+              <div className="ml-4 min-w-0">
+                <p className="text-sm font-body font-semibold text-lumiere-navy opacity-70">Total Hours</p>
+                <p className="text-2xl font-heading font-bold text-lumiere-navy">
                   {hours.reduce((sum, h) => sum + h.hours, 0).toFixed(1)}
                 </p>
               </div>
@@ -665,10 +665,10 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <CurrencyDollarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-sage flex-shrink-0" />
-              <div className="ml-3 sm:ml-4 min-w-0">
-                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Total Earnings</p>
-                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">
+              <CurrencyDollarIcon className="h-8 w-8 text-lumiere-sage flex-shrink-0" />
+              <div className="ml-4 min-w-0">
+                <p className="text-sm font-body font-semibold text-lumiere-navy opacity-70">Total Earnings</p>
+                <p className="text-2xl font-heading font-bold text-lumiere-navy">
                   ${hours.reduce((sum, h) => sum + h.total, 0).toFixed(2)}
                 </p>
               </div>
@@ -677,21 +677,21 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <DocumentTextIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-burgundy flex-shrink-0" />
-              <div className="ml-3 sm:ml-4 min-w-0">
-                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Pending Approval</p>
-                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">{pendingHours.length}</p>
+              <DocumentTextIcon className="h-8 w-8 text-lumiere-burgundy flex-shrink-0" />
+              <div className="ml-4 min-w-0">
+                <p className="text-sm font-body font-semibold text-lumiere-navy opacity-70">Pending Approval</p>
+                <p className="text-2xl font-heading font-bold text-lumiere-navy">{pendingHours.length}</p>
               </div>
             </div>
           </div>
           
           <div className="card cursor-pointer hover:bg-lumiere-grey transition-colors" onClick={() => setShowTaxSettings(true)}>
             <div className="flex items-center">
-              <CheckCircleIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-sage flex-shrink-0" />
-              <div className="ml-3 sm:ml-4 min-w-0">
-                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Quarterly Taxes</p>
-                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">${taxAmount.toFixed(2)}</p>
-                <p className="text-xs text-lumiere-navy opacity-60">Click to edit tax rate ({taxRate}%)</p>
+              <CheckCircleIcon className="h-8 w-8 text-lumiere-sage flex-shrink-0" />
+              <div className="ml-4 min-w-0">
+                <p className="text-sm font-body font-semibold text-lumiere-navy opacity-70">Quarterly Taxes</p>
+                <p className="text-2xl font-heading font-bold text-lumiere-navy">${taxAmount.toFixed(2)}</p>
+                <p className="text-xs font-body text-lumiere-navy opacity-60">Click to edit tax rate ({taxRate}%)</p>
               </div>
             </div>
           </div>
@@ -699,14 +699,14 @@ Thanks!
 
         {/* Client Management */}
         <div className="card mb-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-3 sm:space-y-0">
-            <h2 className="text-lg sm:text-xl font-semibold text-lumiere-navy">Client Management</h2>
+          <div className="mobile-first justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+            <h2 className="font-heading text-2xl lg:text-3xl text-lumiere-navy">Client Management</h2>
             <button
               onClick={() => setShowAddClient(!showAddClient)}
-              className="btn-primary flex items-center text-sm w-full sm:w-auto"
+              className="btn-primary w-full sm:w-auto"
             >
-              <UserGroupIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-              Add Client
+              <UserGroupIcon className="h-5 w-5" />
+              <span>Add Client</span>
             </button>
           </div>
 
@@ -714,7 +714,7 @@ Thanks!
             <div className="bg-lumiere-grey p-4 rounded-lg mb-4">
               <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-lumiere-navy mb-1">Client Name</label>
+                  <label className="block text-sm font-body font-semibold text-lumiere-navy mb-2">Client Name</label>
                   <input
                     type="text"
                     value={newClient.name}
@@ -724,7 +724,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-lumiere-navy mb-1">Email</label>
+                  <label className="block text-sm font-body font-semibold text-lumiere-navy mb-2">Email</label>
                   <input
                     type="email"
                     value={newClient.email}
@@ -734,7 +734,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-lumiere-navy mb-1">Address</label>
+                  <label className="block text-sm font-body font-semibold text-lumiere-navy mb-2">Address</label>
                   <textarea
                     value={newClient.address}
                     onChange={(e) => setNewClient({...newClient, address: e.target.value})}
@@ -1313,22 +1313,20 @@ Thanks!
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-sm text-lumiere-ivory opacity-80 mb-2">
-              © {new Date().getFullYear()} The Wednesday Collective. All rights reserved.
+              © {new Date().getFullYear()} All rights reserved.
             </p>
             <p className="text-sm text-lumiere-ivory opacity-80 mb-4">
               Powered by the Lumière Design System
             </p>
             <p className="text-sm text-lumiere-ivory opacity-80">
-              Part of The Wednesday Collective family of initiatives
-            </p>
-            <a 
+              Part of <a 
               href="https://thewednesdaycollective.com/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block mt-2 text-lumiere-gold hover:text-lumiere-sage transition-colors"
-            >
-              The Wednesday Collective
-            </a>
+            >The Wednesday Collective
+            </a> family of initiatives
+            </p>
           </div>
         </div>
       </footer>
