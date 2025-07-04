@@ -1,8 +1,8 @@
-# ⏰ Hours Tracker - Professional Time & Invoice Management
+# ⏰ Contractor Tracker App - Professional Time & Invoice Management
 
 A modern, feature-rich web application for tracking work hours, managing clients, creating professional invoices, and calculating taxes. Built with React, Vite, and Tailwind CSS.
 
-![Hours Tracker Demo](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
+![Contractor Tracker App](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![Vite](https://img.shields.io/badge/Vite-7.0.1-purple)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.17-38B2AC)

@@ -263,7 +263,7 @@ function App() {
     
     // Header
     doc.setFontSize(20)
-    doc.text('HOURS TRACKER REPORT', 105, 20, { align: 'center' })
+    doc.text('CONTRACTOR TRACKER APP REPORT', 105, 20, { align: 'center' })
     
     doc.setFontSize(12)
     doc.text(`Generated: ${format(new Date(), 'yyyy-MM-dd HH:mm')}`, 20, 35)
@@ -581,7 +581,7 @@ Thanks!
         <div className="mb-8">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Hours Tracker</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Contractor Tracker App</h1>
               <p className="text-gray-600">Track your hours, create invoices, and manage taxes</p>
             </div>
             <div className="flex space-x-2">

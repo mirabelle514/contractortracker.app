@@ -1,4 +1,4 @@
-# 🚀 Hours Tracker - GoDaddy Deployment Guide
+# 🚀 Contractor Tracker App - GoDaddy Deployment Guide
 
 ## 📋 What You Need
 
@@ -56,7 +56,7 @@ public_html/
 
 ### Step 4: Test Your App
 1. Visit your domain: `https://yourdomain.com`
-2. The Hours Tracker should load immediately
+2. The Contractor Tracker App should load immediately
 3. Test all features: adding hours, creating invoices, etc.
 
 ## 🔧 Important Notes
@@ -143,4 +143,4 @@ Once deployed, you'll have a professional hours tracking app accessible from any
 
 ---
 
-**Your Hours Tracker is now ready for professional use! 🚀** 
+**Your Contractor Tracker App is now ready for professional use! 🚀** 
