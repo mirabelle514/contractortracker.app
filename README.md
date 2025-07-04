@@ -1,4 +1,4 @@
-# ⏰ Contractor Tracker App - Professional Time & Invoice Management
+# Contractor Tracker App - Professional Time & Invoice Management
 
 A modern, feature-rich web application for tracking work hours, managing clients, creating professional invoices, and calculating taxes. Built with React, Vite, and Tailwind CSS.
 
@@ -7,47 +7,47 @@ A modern, feature-rich web application for tracking work hours, managing clients
 ![Vite](https://img.shields.io/badge/Vite-7.0.1-purple)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.17-38B2AC)
 
-## ✨ Features
+## Features
 
-### 🕐 **Time Tracking**
+### **Time Tracking**
 - **Manual hour entry** with date, time, and description
 - **Client assignment** for organized billing
 - **Custom hourly rates** per client or default rate
 - **Status management** (pending → approved → invoiced)
 - **Past hours archive** for invoiced work
 
-### 👥 **Client Management**
+### **Client Management**
 - **Complete client profiles** with contact information
 - **Individual hourly rates** per client
 - **Client-specific invoices** and reporting
 - **Easy client switching** when adding hours
 
-### 📄 **Invoice System**
+### **Invoice System**
 - **Professional PDF invoices** with client details
 - **Custom invoice numbering** (e.g., CLIENT-001, INV-2024-001)
 - **Editable invoices** - modify numbers, dates, and remove hours
 - **Invoice status tracking** (pending/paid)
 - **Automatic calculations** for totals and taxes
 
-### 📧 **Manager Approval**
+### **Manager Approval**
 - **Email manager** for hours approval
 - **Pre-filled email templates** with pending hours summary
 - **Manager email configuration** in settings
 - **Professional approval workflow**
 
-### 📊 **Reporting & Analytics**
+### **Reporting & Analytics**
 - **Quarterly tax calculations** with due dates
 - **Comprehensive PDF reports** with summaries
 - **Client breakdown** and earnings analysis
 - **Export/Import** data backup functionality
 
-### 🔒 **Security & Data**
+### **Security & Data**
 - **Password protection** for app access
 - **Local storage** for data persistence
 - **Regular backup reminders** (7-day intervals)
 - **Data export/import** for safekeeping
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 16+ 
@@ -108,7 +108,7 @@ A modern, feature-rich web application for tracking work hours, managing clients
 - **Date Handling**: date-fns
 - **File Operations**: file-saver
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 hours-tracker/
@@ -127,7 +127,7 @@ hours-tracker/
 └── README.md                # This file
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### GoDaddy Hosting
 1. **Build for production**
@@ -145,7 +145,7 @@ hours-tracker/
 
 See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed instructions.
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 No environment variables required - everything is client-side!
@@ -155,7 +155,7 @@ No environment variables required - everything is client-side!
 - **Styling**: Update `src/App.css` for custom styles
 - **Features**: Add new functionality in `src/App.jsx`
 
-## 📱 Browser Support
+## Browser Support
 
 - ✅ Chrome 90+
 - ✅ Firefox 88+
@@ -163,14 +163,14 @@ No environment variables required - everything is client-side!
 - ✅ Edge 90+
 - ✅ Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 🔒 Security Features
+## Security Features
 
 - **Password Protection**: App-level authentication
 - **Local Storage**: Data stays on your device
 - **No Server**: No data sent to external servers
 - **Export Backups**: Regular data backups recommended
 
-## 🤝 Contributing
+## Contributing
 
 1. **Fork the repository**
 2. **Create a feature branch**
@@ -187,24 +187,24 @@ No environment variables required - everything is client-side!
    ```
 5. **Open a Pull Request**
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **React Team** for the amazing framework
 - **Tailwind CSS** for the utility-first CSS framework
 - **Heroicons** for the beautiful icons
 - **Vite** for the fast build tool
 
-## 📞 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/yourusername/hours-tracker/issues)
 - **Documentation**: Check the code comments and this README
 - **Deployment**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
 
-## 🎯 Roadmap
+## Roadmap
 
 - [ ] **Cloud Sync** - Optional cloud storage
 - [ ] **Team Features** - Multi-user support
@@ -217,4 +217,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ for freelancers, consultants, and small businesses**
 
-⭐ **Star this repository if you find it helpful!**
+**Star this repository if you find it helpful!**

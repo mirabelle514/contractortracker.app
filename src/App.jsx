@@ -1307,6 +1307,31 @@ Thanks!
           </div>
         )}
       </div>
+      
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-sm text-gray-400 mb-2">
+              © {new Date().getFullYear()} The Wednesday Collective. All rights reserved.
+            </p>
+            <p className="text-sm text-gray-400 mb-4">
+              Powered by the Lumière Design System
+            </p>
+            <p className="text-sm text-gray-400">
+              Part of The Wednesday Collective family of initiatives
+            </p>
+            <a 
+              href="https://thewednesdaycollective.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block mt-2 text-primary-400 hover:text-primary-300 transition-colors"
+            >
+              The Wednesday Collective
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

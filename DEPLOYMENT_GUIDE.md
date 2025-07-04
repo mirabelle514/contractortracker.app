@@ -1,12 +1,12 @@
-# 🚀 Contractor Tracker App - GoDaddy Deployment Guide
+# Contractor Tracker App - GoDaddy Deployment Guide
 
-## 📋 What You Need
+## What You Need
 
 1. **GoDaddy Hosting Account** (Shared hosting or better)
 2. **Domain Name** (optional, but recommended)
 3. **File Manager Access** (included with GoDaddy hosting)
 
-## 📁 Files to Upload
+## Files to Upload
 
 Upload **ALL** files from the `dist` folder to your GoDaddy hosting:
 
@@ -22,7 +22,7 @@ dist/
     └── purify.es-CQJ0hv7W.js
 ```
 
-## 🎯 Step-by-Step Deployment
+## Step-by-Step Deployment
 
 ### Step 1: Access GoDaddy File Manager
 1. Log into your GoDaddy hosting control panel
@@ -59,7 +59,7 @@ public_html/
 2. The Contractor Tracker App should load immediately
 3. Test all features: adding hours, creating invoices, etc.
 
-## 🔧 Important Notes
+## Important Notes
 
 ### ✅ What Works
 - **All features** work exactly as in development
@@ -73,7 +73,7 @@ public_html/
 - **No user accounts** - anyone with access can use the app
 - **No real-time sync** - data is local to each device
 
-### 🔒 Security Considerations
+### Security Considerations
 - **Password protection** - set up app password for basic security
 - **Regular backups** - use the export feature regularly
 - **Private hosting** - consider who has access to your hosting
@@ -91,7 +91,7 @@ Create a subdomain like `hours.yourdomain.com`:
 2. Add a CNAME record: `hours` → `yourdomain.com`
 3. Upload files to `public_html/hours/` folder
 
-## 📱 Mobile Access
+## Mobile Access
 
 Your app is fully responsive and works on:
 - ✅ Desktop computers
@@ -129,7 +129,7 @@ Your app is fully responsive and works on:
 - Ensure pop-ups are allowed
 - Try downloading in incognito mode
 
-## 📞 Support
+## Support
 
 If you encounter issues:
 1. Check browser console for error messages
@@ -137,10 +137,10 @@ If you encounter issues:
 3. Test in different browsers
 4. Contact GoDaddy support for hosting issues
 
-## 🎉 Success!
+## Success!
 
 Once deployed, you'll have a professional hours tracking app accessible from anywhere with an internet connection!
 
 ---
 
-**Your Contractor Tracker App is now ready for professional use! 🚀** 
+**Your Contractor Tracker App is now ready for professional use!** 
