@@ -545,18 +545,18 @@ Thanks!
   // Authentication screen
   if (showAuth && !isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--lumiere-ivory)' }}>
-        <div className="max-w-md w-full gap-lg p-8">
+      <div className="min-h-screen bg-lumiere-ivory flex items-center justify-center">
+        <div className="max-w-md w-full space-y-8 p-8">
           <div className="text-center">
-            <ShieldCheckIcon className="mx-auto h-8 w-8" style={{ color: 'var(--lumiere-navy)' }} />
-            <h2 className="mt-6 text-3xl font-bold" style={{ color: 'var(--lumiere-navy)' }}>
+            <ShieldCheckIcon className="mx-auto h-12 w-12 text-lumiere-burgundy" />
+            <h2 className="mt-6 text-3xl font-bold text-lumiere-navy">
               {appPassword ? 'Enter Password' : 'Set App Password'}
             </h2>
-            <p className="mt-2 text-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>
+            <p className="mt-2 text-sm text-lumiere-navy opacity-80">
               {appPassword ? 'Enter your password to access the app' : 'Set a password to protect your data'}
             </p>
           </div>
-          <div className="gap-md">
+          <div className="space-y-4">
             <input
               type="password"
               value={password}
@@ -567,7 +567,7 @@ Thanks!
             />
             <button
               onClick={appPassword ? handleAuth : setupPassword}
-              className="btn btn-primary w-full"
+              className="btn-primary w-full"
             >
               {appPassword ? 'Login' : 'Set Password'}
             </button>
@@ -578,25 +578,25 @@ Thanks!
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--lumiere-ivory)' }}>
+    <div className="min-h-screen bg-lumiere-ivory">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-lg">
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-md">
+        <div className="mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Contractor Tracker App</h1>
-              <p className="text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Track your hours, create invoices, and manage taxes</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-lumiere-navy mb-2">Contractor Tracker App</h1>
+              <p className="text-lumiere-navy text-sm sm:text-base opacity-80">Track your hours, create invoices, and manage taxes</p>
             </div>
-            <div className="flex flex-wrap gap-sm w-full sm:w-auto">
+            <div className="flex flex-wrap gap-2 w-full sm:w-auto">
               <button
                 onClick={exportData}
-                className="btn btn-secondary flex items-center text-sm"
+                className="btn-secondary flex items-center text-sm"
                 title="Export Data"
               >
-                <ArrowDownTrayIcon className="h-4 w-4 mr-1" />
+                <ArrowDownTrayIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Export</span>
               </button>
-              <label className="btn btn-secondary flex items-center cursor-pointer text-sm">
-                <ArrowUpTrayIcon className="h-4 w-4 mr-1" />
+              <label className="btn-secondary flex items-center cursor-pointer text-sm">
+                <ArrowUpTrayIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Import</span>
                 <input
                   type="file"
@@ -607,10 +607,10 @@ Thanks!
               </label>
               <button
                 onClick={generatePDFReport}
-                className="btn btn-primary flex items-center text-sm"
+                className="btn-primary flex items-center text-sm"
                 title="Generate PDF Report"
               >
-                <DocumentArrowDownIcon className="h-4 w-4 mr-1" />
+                <DocumentArrowDownIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Report</span>
               </button>
             </div>
@@ -619,29 +619,28 @@ Thanks!
 
         {/* Backup Reminder */}
         {showBackupReminder && (
-          <div className="card mb-lg" style={{ backgroundColor: 'var(--lumiere-ivory)', borderColor: 'var(--lumiere-gold)' }}>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-md">
-              <ExclamationTriangleIcon className="h-5 w-5 mr-3 flex-shrink-0" style={{ color: 'var(--lumiere-burgundy)' }} />
+          <div className="bg-lumiere-grey border border-lumiere-gold rounded-lg p-4 mb-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0">
+              <ExclamationTriangleIcon className="h-6 w-6 text-lumiere-burgundy mr-3 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-medium" style={{ color: 'var(--lumiere-burgundy)' }}>Backup Reminder</h3>
-                <p className="text-sm mt-1" style={{ color: 'var(--lumiere-navy)', opacity: 0.8 }}>
+                <h3 className="text-sm font-medium text-lumiere-navy">Backup Reminder</h3>
+                <p className="text-sm text-lumiere-navy opacity-80 mt-1">
                   {lastBackup 
                     ? `It's been ${Math.floor((new Date() - lastBackup) / (1000 * 60 * 60 * 24))} days since your last backup.`
                     : "You haven't backed up your data yet."
                   }
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-sm w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
                 <button
                   onClick={() => setShowBackupReminder(false)}
-                  className="text-sm"
-                  style={{ color: 'var(--lumiere-burgundy)' }}
+                  className="text-sm text-lumiere-burgundy hover:text-lumiere-navy transition-colors"
                 >
                   Remind Later
                 </button>
                 <button
                   onClick={exportData}
-                  className="btn btn-primary text-sm"
+                  className="btn-primary text-sm"
                 >
                   Backup Now
                 </button>
@@ -651,13 +650,13 @@ Thanks!
         )}
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-lg">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
           <div className="card">
             <div className="flex items-center">
-              <ClockIcon className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--lumiere-navy)' }} />
-              <div className="ml-3 min-w-0">
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Total Hours</p>
-                <p className="text-lg sm:text-2xl font-bold" style={{ color: 'var(--lumiere-navy)' }}>
+              <ClockIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-burgundy flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Total Hours</p>
+                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">
                   {hours.reduce((sum, h) => sum + h.hours, 0).toFixed(1)}
                 </p>
               </div>
@@ -666,10 +665,10 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <CurrencyDollarIcon className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--lumiere-sage)' }} />
-              <div className="ml-3 min-w-0">
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Total Earnings</p>
-                <p className="text-lg sm:text-2xl font-bold" style={{ color: 'var(--lumiere-navy)' }}>
+              <CurrencyDollarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-sage flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Total Earnings</p>
+                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">
                   ${hours.reduce((sum, h) => sum + h.total, 0).toFixed(2)}
                 </p>
               </div>
@@ -678,44 +677,44 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <DocumentTextIcon className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--lumiere-burgundy)' }} />
-              <div className="ml-3 min-w-0">
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Pending Approval</p>
-                <p className="text-lg sm:text-2xl font-bold" style={{ color: 'var(--lumiere-navy)' }}>{pendingHours.length}</p>
+              <DocumentTextIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-burgundy flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Pending Approval</p>
+                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">{pendingHours.length}</p>
               </div>
             </div>
           </div>
           
-          <div className="card cursor-pointer transition-colors" onClick={() => setShowTaxSettings(true)} style={{ cursor: 'pointer' }}>
+          <div className="card cursor-pointer hover:bg-lumiere-grey transition-colors" onClick={() => setShowTaxSettings(true)}>
             <div className="flex items-center">
-              <CheckCircleIcon className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--lumiere-burgundy)' }} />
-              <div className="ml-3 min-w-0">
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Quarterly Taxes</p>
-                <p className="text-lg sm:text-2xl font-bold" style={{ color: 'var(--lumiere-navy)' }}>${taxAmount.toFixed(2)}</p>
-                <p className="text-xs" style={{ color: 'var(--lumiere-navy)', opacity: 0.5 }}>Click to edit tax rate ({taxRate}%)</p>
+              <CheckCircleIcon className="h-6 w-6 sm:h-8 sm:w-8 text-lumiere-sage flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-lumiere-navy opacity-70">Quarterly Taxes</p>
+                <p className="text-lg sm:text-2xl font-bold text-lumiere-navy">${taxAmount.toFixed(2)}</p>
+                <p className="text-xs text-lumiere-navy opacity-60">Click to edit tax rate ({taxRate}%)</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Client Management */}
-        <div className="card mb-lg">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-md gap-md">
-            <h2 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--lumiere-navy)' }}>Client Management</h2>
+        <div className="card mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-3 sm:space-y-0">
+            <h2 className="text-lg sm:text-xl font-semibold text-lumiere-navy">Client Management</h2>
             <button
               onClick={() => setShowAddClient(!showAddClient)}
-              className="btn btn-primary flex items-center text-sm w-full sm:w-auto"
+              className="btn-primary flex items-center text-sm w-full sm:w-auto"
             >
-              <UserGroupIcon className="h-4 w-4 mr-1" />
+              <UserGroupIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
               Add Client
             </button>
           </div>
 
           {showAddClient && (
-            <div className="p-md rounded-lg mb-md" style={{ backgroundColor: 'var(--lumiere-grey)' }}>
-              <div className="grid grid-cols-1 gap-md">
+            <div className="bg-lumiere-grey p-4 rounded-lg mb-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Client Name</label>
+                  <label className="block text-sm font-medium text-lumiere-navy mb-1">Client Name</label>
                   <input
                     type="text"
                     value={newClient.name}
@@ -725,7 +724,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Email</label>
+                  <label className="block text-sm font-medium text-lumiere-navy mb-1">Email</label>
                   <input
                     type="email"
                     value={newClient.email}
@@ -735,7 +734,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Address</label>
+                  <label className="block text-sm font-medium text-lumiere-navy mb-1">Address</label>
                   <textarea
                     value={newClient.address}
                     onChange={(e) => setNewClient({...newClient, address: e.target.value})}
@@ -745,7 +744,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Hourly Rate</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Hourly Rate</label>
                   <input
                     type="number"
                     value={newClient.hourlyRate}
@@ -757,16 +756,16 @@ Thanks!
                   />
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row justify-end gap-sm mt-md">
+              <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
                 <button
                   onClick={() => setShowAddClient(false)}
-                  className="btn btn-secondary text-sm"
+                  className="btn-secondary text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={addClient}
-                  className="btn btn-primary text-sm"
+                  className="btn-primary text-sm"
                 >
                   Add Client
                 </button>
@@ -775,28 +774,27 @@ Thanks!
           )}
 
           {/* Clients List */}
-          <div className="gap-sm">
+          <div className="space-y-3">
             {clients.length === 0 ? (
-              <p className="text-center py-8" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>No clients added yet. Add your first client!</p>
+              <p className="text-gray-500 text-center py-8">No clients added yet. Add your first client!</p>
             ) : (
               clients.map(client => (
-                <div key={client.id} className="flex items-center justify-between p-3 sm:p-4 border rounded-lg mb-sm" style={{ backgroundColor: 'var(--lumiere-ivory)', borderColor: 'var(--lumiere-gold)' }}>
+                <div key={client.id} className="flex items-center justify-between p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-sm">
-                      <BuildingOfficeIcon className="h-4 w-4 flex-shrink-0" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }} />
+                    <div className="flex items-center space-x-2 sm:space-x-4">
+                      <BuildingOfficeIcon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400 flex-shrink-0" />
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-medium text-sm sm:text-base truncate" style={{ color: 'var(--lumiere-navy)' }}>{client.name}</h3>
-                        <p className="text-xs sm:text-sm truncate" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>{client.email}</p>
+                        <h3 className="font-medium text-gray-900 text-sm sm:text-base truncate">{client.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">{client.email}</p>
                       </div>
-                      <span className="font-medium text-sm sm:text-base flex-shrink-0" style={{ color: 'var(--lumiere-sage)' }}>${client.hourlyRate}/hr</span>
+                      <span className="text-green-600 font-medium text-sm sm:text-base flex-shrink-0">${client.hourlyRate}/hr</span>
                     </div>
                   </div>
                   <button
                     onClick={() => deleteClient(client.id)}
-                    className="ml-2 flex-shrink-0"
-                    style={{ color: 'var(--lumiere-burgundy)' }}
+                    className="text-red-600 hover:text-red-800 ml-2 flex-shrink-0"
                   >
-                    <TrashIcon className="h-4 w-4" />
+                    <TrashIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 </div>
               ))
@@ -805,12 +803,12 @@ Thanks!
         </div>
 
         {/* Settings */}
-        <div className="card mb-lg">
-          <h2 className="text-lg sm:text-xl font-semibold mb-md" style={{ color: 'var(--lumiere-navy)' }}>Settings</h2>
-          <div className="grid grid-cols-1 gap-lg">
+        <div className="card mb-8">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Settings</h2>
+          <div className="grid grid-cols-1 gap-6">
             <div>
-              <h3 className="font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Default Hourly Rate</h3>
-              <div className="flex items-center gap-md">
+              <h3 className="font-medium text-gray-900 mb-2">Default Hourly Rate</h3>
+              <div className="flex items-center space-x-4">
                 <input
                   type="number"
                   value={hourlyRate}
@@ -819,11 +817,11 @@ Thanks!
                   min="0"
                   step="0.01"
                 />
-                <span style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>USD</span>
+                <span className="text-gray-600">USD</span>
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Manager Email</h3>
+              <h3 className="font-medium text-gray-900 mb-2">Manager Email</h3>
               <input
                 type="email"
                 value={managerEmail}
@@ -831,44 +829,52 @@ Thanks!
                 className="input-field"
                 placeholder="manager@company.com"
               />
-              <p className="text-sm mt-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>For sending approval requests</p>
+              <p className="text-sm text-gray-600 mt-1">For sending approval requests</p>
             </div>
           </div>
         </div>
 
         {/* Hours Management with Tabs */}
-        <div className="card mb-lg">
-          <div className="flex flex-col gap-md mb-md">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
-              <h2 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--lumiere-navy)' }}>Hours Management</h2>
-              <div className="flex gap-sm w-full sm:w-auto">
+        <div className="card mb-8">
+          <div className="flex flex-col space-y-4 mb-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Hours Management</h2>
+              <div className="flex space-x-2 w-full sm:w-auto">
                 <button
                   onClick={emailManager}
-                  className="btn btn-secondary flex items-center text-sm flex-1 sm:flex-none"
+                  className="btn-secondary flex items-center text-sm flex-1 sm:flex-none"
                   title="Email Manager for Approval"
                 >
-                  <EnvelopeIcon className="h-4 w-4 mr-1" />
+                  <EnvelopeIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                   <span className="hidden sm:inline">Email Manager</span>
                 </button>
                 <button
                   onClick={() => setShowAddHours(!showAddHours)}
-                  className="btn btn-primary flex items-center text-sm flex-1 sm:flex-none"
+                  className="btn-primary flex items-center text-sm flex-1 sm:flex-none"
                 >
-                  <PlusIcon className="h-4 w-4 mr-1" />
+                  <PlusIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                   Add Hours
                 </button>
               </div>
             </div>
-            <div className="nav-tabs w-full sm:w-auto">
+            <div className="flex border border-gray-300 rounded-lg w-full sm:w-auto">
               <button
                 onClick={() => setActiveTab('current')}
-                className={`nav-tab ${activeTab === 'current' ? 'active' : ''}`}
+                className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-l-lg ${
+                  activeTab === 'current' 
+                    ? 'bg-primary-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
               >
                 Current ({hours.filter(h => !h.invoiced).length})
               </button>
               <button
                 onClick={() => setActiveTab('past')}
-                className={`nav-tab ${activeTab === 'past' ? 'active' : ''}`}
+                className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-r-lg ${
+                  activeTab === 'past' 
+                    ? 'bg-primary-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
               >
                 Past ({invoicedHours.length})
               </button>
@@ -876,10 +882,10 @@ Thanks!
           </div>
 
           {showAddHours && (
-            <div className="p-md rounded-lg mb-md" style={{ backgroundColor: 'var(--lumiere-grey)' }}>
-              <div className="grid grid-cols-1 gap-md">
+            <div className="bg-gray-50 p-4 rounded-lg mb-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Date</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
                   <input
                     type="date"
                     value={newHours.date}
@@ -888,7 +894,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Client</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Client</label>
                   <select
                     value={newHours.clientId}
                     onChange={(e) => setNewHours({...newHours, clientId: e.target.value})}
@@ -903,7 +909,7 @@ Thanks!
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Hours</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Hours</label>
                   <input
                     type="number"
                     value={newHours.hours}
@@ -915,7 +921,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Rate (if no client)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Rate (if no client)</label>
                   <input
                     type="number"
                     value={newHours.rate}
@@ -928,7 +934,7 @@ Thanks!
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Description</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                   <input
                     type="text"
                     value={newHours.description}
@@ -938,16 +944,16 @@ Thanks!
                   />
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row justify-end gap-sm mt-md">
+              <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
                 <button
                   onClick={() => setShowAddHours(false)}
-                  className="btn btn-secondary text-sm"
+                  className="btn-secondary text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={addHours}
-                  className="btn btn-primary text-sm"
+                  className="btn-primary text-sm"
                 >
                   Add Hours
                 </button>
@@ -956,23 +962,23 @@ Thanks!
           )}
 
           {/* Hours List */}
-          <div className="gap-sm">
+          <div className="space-y-3">
             {activeTab === 'current' ? (
               hours.filter(h => !h.invoiced).length === 0 ? (
-                <p className="text-center py-8" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>No current hours. Add your first entry!</p>
+                <p className="text-gray-500 text-center py-8">No current hours. Add your first entry!</p>
               ) : (
                 hours.filter(h => !h.invoiced).map(hour => (
-                  <div key={hour.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 border rounded-lg mb-sm" style={{ backgroundColor: 'var(--lumiere-ivory)', borderColor: 'var(--lumiere-gold)' }}>
+                  <div key={hour.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-white border border-gray-200 rounded-lg space-y-2 sm:space-y-0">
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-sm">
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>{hour.date}</span>
-                        <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)' }}>{hour.hours}h</span>
-                        <span className="text-sm sm:text-base truncate" style={{ color: 'var(--lumiere-navy)' }}>{hour.description}</span>
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--lumiere-sage)' }}>{getClientName(hour.clientId)}</span>
-                        <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-sage)' }}>${hour.total.toFixed(2)}</span>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-4">
+                        <span className="text-xs sm:text-sm text-gray-500">{hour.date}</span>
+                        <span className="font-medium text-sm sm:text-base">{hour.hours}h</span>
+                        <span className="text-gray-700 text-sm sm:text-base truncate">{hour.description}</span>
+                        <span className="text-blue-600 text-xs sm:text-sm">{getClientName(hour.clientId)}</span>
+                        <span className="text-green-600 font-medium text-sm sm:text-base">${hour.total.toFixed(2)}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-sm w-full sm:w-auto">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
                       <span className={`px-2 py-1 text-xs rounded-full ${
                         hour.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                       }`}>
@@ -981,16 +987,16 @@ Thanks!
                       {hour.status === 'pending' && (
                         <button
                           onClick={() => approveHours(hour.id)}
-                          style={{ color: 'var(--lumiere-sage)' }}
+                          className="text-green-600 hover:text-green-800"
                         >
-                          <CheckCircleIcon className="h-4 w-4" />
+                          <CheckCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </button>
                       )}
                       <button
                         onClick={() => deleteHours(hour.id)}
-                        style={{ color: 'var(--lumiere-burgundy)' }}
+                        className="text-red-600 hover:text-red-800"
                       >
-                        <TrashIcon className="h-4 w-4" />
+                        <TrashIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </button>
                     </div>
                   </div>
@@ -998,22 +1004,22 @@ Thanks!
               )
             ) : (
               invoicedHours.length === 0 ? (
-                <p className="text-center py-8" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>No past hours. Create invoices to see them here.</p>
+                <p className="text-gray-500 text-center py-8">No past hours. Create invoices to see them here.</p>
               ) : (
                 invoicedHours.map(hour => (
-                  <div key={hour.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 border rounded-lg mb-sm" style={{ backgroundColor: 'var(--lumiere-grey)', borderColor: 'var(--lumiere-gold)' }}>
+                  <div key={hour.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg space-y-2 sm:space-y-0">
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-sm">
-                        <ArchiveBoxIcon className="h-4 w-4 flex-shrink-0" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }} />
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>{hour.date}</span>
-                        <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)' }}>{hour.hours}h</span>
-                        <span className="text-sm sm:text-base truncate" style={{ color: 'var(--lumiere-navy)' }}>{hour.description}</span>
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--lumiere-sage)' }}>{getClientName(hour.clientId)}</span>
-                        <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-sage)' }}>${hour.total.toFixed(2)}</span>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-4">
+                        <ArchiveBoxIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-gray-500">{hour.date}</span>
+                        <span className="font-medium text-sm sm:text-base">{hour.hours}h</span>
+                        <span className="text-gray-700 text-sm sm:text-base truncate">{hour.description}</span>
+                        <span className="text-blue-600 text-xs sm:text-sm">{getClientName(hour.clientId)}</span>
+                        <span className="text-green-600 font-medium text-sm sm:text-base">${hour.total.toFixed(2)}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-sm w-full sm:w-auto">
-                      <span className="px-2 py-1 text-xs rounded-full" style={{ backgroundColor: 'var(--lumiere-grey)', color: 'var(--lumiere-navy)' }}>
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
+                      <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">
                         Invoiced
                       </span>
                     </div>
@@ -1025,37 +1031,37 @@ Thanks!
         </div>
 
         {/* Invoice Management */}
-        <div className="card mb-lg">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-md gap-md">
-            <h2 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--lumiere-navy)' }}>Invoice Management</h2>
+        <div className="card mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-3 sm:space-y-0">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Invoice Management</h2>
             {approvedHours.length > 0 && (
               <button
                 onClick={() => setShowCreateInvoice(!showCreateInvoice)}
-                className="btn btn-primary flex items-center text-sm w-full sm:w-auto"
+                className="btn-primary flex items-center text-sm w-full sm:w-auto"
               >
-                <DocumentTextIcon className="h-4 w-4 mr-1" />
+                <DocumentTextIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                 Create Invoice
               </button>
             )}
           </div>
 
           {showCreateInvoice && (
-            <div className="p-md rounded-lg mb-md" style={{ backgroundColor: 'var(--lumiere-grey)' }}>
-              <h3 className="font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Create Invoices from Approved Hours</h3>
-              <p className="text-sm mb-md" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>
+            <div className="bg-gray-50 p-4 rounded-lg mb-4">
+              <h3 className="font-medium text-gray-900 mb-2">Create Invoices from Approved Hours</h3>
+              <p className="text-sm text-gray-600 mb-4">
                 Total: {approvedHours.reduce((sum, h) => sum + h.hours, 0).toFixed(1)} hours = 
                 ${approvedHours.reduce((sum, h) => sum + h.total, 0).toFixed(2)}
               </p>
-              <div className="flex justify-end gap-md">
+              <div className="flex justify-end space-x-3">
                 <button
                   onClick={() => setShowCreateInvoice(false)}
-                  className="btn btn-secondary"
+                  className="btn-secondary"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={createInvoice}
-                  className="btn btn-primary"
+                  className="btn-primary"
                 >
                   Create Invoice
                 </button>
@@ -1064,24 +1070,24 @@ Thanks!
           )}
 
           {/* Invoices List */}
-          <div className="gap-sm">
+          <div className="space-y-3">
             {invoices.length === 0 ? (
-              <p className="text-center py-8" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>No invoices created yet.</p>
+              <p className="text-gray-500 text-center py-8">No invoices created yet.</p>
             ) : (
               invoices.map(invoice => (
-                                <div key={invoice.id} className="border rounded-lg overflow-hidden mb-sm" style={{ backgroundColor: 'var(--lumiere-ivory)', borderColor: 'var(--lumiere-gold)' }}>
+                                <div key={invoice.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                   {/* Invoice Header */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 gap-sm">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 space-y-2 sm:space-y-0">
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-sm">
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>Invoice #{invoice.invoiceNumber || invoice.id}</span>
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.6 }}>{invoice.date}</span>
-                        <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)' }}>{invoice.totalHours}h</span>
-                        <span className="text-xs sm:text-sm truncate" style={{ color: 'var(--lumiere-sage)' }}>{invoice.clientName}</span>
-                        <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-sage)' }}>${invoice.totalAmount.toFixed(2)}</span>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-4">
+                        <span className="text-xs sm:text-sm text-gray-500">Invoice #{invoice.invoiceNumber || invoice.id}</span>
+                        <span className="text-xs sm:text-sm text-gray-500">{invoice.date}</span>
+                        <span className="font-medium text-sm sm:text-base">{invoice.totalHours}h</span>
+                        <span className="text-blue-600 text-xs sm:text-sm truncate">{invoice.clientName}</span>
+                        <span className="text-green-600 font-medium text-sm sm:text-base">${invoice.totalAmount.toFixed(2)}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-sm w-full sm:w-auto">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
                       <span className={`px-2 py-1 text-xs rounded-full ${
                         invoice.status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                       }`}>
@@ -1090,25 +1096,25 @@ Thanks!
                       {invoice.status === 'pending' && (
                         <button
                           onClick={() => markInvoicePaid(invoice.id)}
-                          style={{ color: 'var(--lumiere-sage)' }}
+                          className="text-green-600 hover:text-green-800"
                           title="Mark as Paid"
                         >
-                          <CheckCircleIcon className="h-4 w-4" />
+                          <CheckCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </button>
                       )}
                       <button
                         onClick={() => editInvoice(invoice)}
-                        style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}
+                        className="text-gray-600 hover:text-gray-800"
                         title="Edit Invoice"
                       >
-                        <PencilIcon className="h-4 w-4" />
+                        <PencilIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </button>
                       <button
                         onClick={() => generatePDFInvoice(invoice)}
-                        style={{ color: 'var(--lumiere-navy)' }}
+                        className="text-blue-600 hover:text-blue-800"
                         title="Download PDF Invoice"
                       >
-                        <DocumentArrowDownIcon className="h-4 w-4" />
+                        <DocumentArrowDownIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </button>
                     </div>
                   </div>
@@ -1190,37 +1196,37 @@ Thanks!
 
         {/* Tax Summary */}
         <div className="card">
-          <div className="flex justify-between items-center mb-md">
-            <h2 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--lumiere-navy)' }}>Quarterly Tax Summary</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Quarterly Tax Summary</h2>
             <button
               onClick={() => setShowTaxSettings(true)}
-              className="btn btn-secondary flex items-center text-sm"
+              className="btn-secondary flex items-center text-sm"
             >
               <PencilIcon className="h-4 w-4 mr-1" />
               Edit Tax Rate
             </button>
           </div>
-          <div className="grid grid-cols-1 gap-lg">
+          <div className="grid grid-cols-1 gap-6">
             <div>
-              <h3 className="font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Current Quarter</h3>
-              <div className="gap-sm">
+              <h3 className="font-medium text-gray-900 mb-2">Current Quarter</h3>
+              <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Total Earnings:</span>
-                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)' }}>${totalEarnings.toFixed(2)}</span>
+                  <span className="text-gray-600 text-sm sm:text-base">Total Earnings:</span>
+                  <span className="font-medium text-sm sm:text-base">${totalEarnings.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>Taxes ({taxRate}%):</span>
-                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-burgundy)' }}>${taxAmount.toFixed(2)}</span>
+                  <span className="text-gray-600 text-sm sm:text-base">Taxes ({taxRate}%):</span>
+                  <span className="font-medium text-red-600 text-sm sm:text-base">${taxAmount.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between border-t pt-2" style={{ borderColor: 'var(--lumiere-gold)' }}>
-                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-navy)' }}>Net Income:</span>
-                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--lumiere-sage)' }}>${(totalEarnings - taxAmount).toFixed(2)}</span>
+                <div className="flex justify-between border-t pt-2">
+                  <span className="text-gray-900 font-medium text-sm sm:text-base">Net Income:</span>
+                  <span className="font-medium text-green-600 text-sm sm:text-base">${(totalEarnings - taxAmount).toFixed(2)}</span>
                 </div>
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-sm" style={{ color: 'var(--lumiere-navy)' }}>Tax Due Dates</h3>
-              <div className="text-xs sm:text-sm gap-sm" style={{ color: 'var(--lumiere-navy)', opacity: 0.7 }}>
+              <h3 className="font-medium text-gray-900 mb-2">Tax Due Dates</h3>
+              <div className="text-xs sm:text-sm text-gray-600 space-y-1">
                 <p>Q1: April 15</p>
                 <p>Q2: June 15</p>
                 <p>Q3: September 15</p>
@@ -1303,25 +1309,26 @@ Thanks!
       </div>
       
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-16">
+      <footer className="bg-lumiere-navy text-lumiere-ivory py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-sm text-gray-400 mb-2">
-              © {new Date().getFullYear()} All rights reserved.
+            <p className="text-sm text-lumiere-ivory opacity-80 mb-2">
+              © {new Date().getFullYear()} The Wednesday Collective. All rights reserved.
             </p>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-sm text-lumiere-ivory opacity-80 mb-4">
               Powered by the Lumière Design System
             </p>
-            <p className="text-sm text-gray-400">
-              Part of  <a 
+            <p className="text-sm text-lumiere-ivory opacity-80">
+              Part of The Wednesday Collective family of initiatives
+            </p>
+            <a 
               href="https://thewednesdaycollective.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-block mt-2 text-primary-400 hover:text-primary-300 transition-colors"
+              className="inline-block mt-2 text-lumiere-gold hover:text-lumiere-sage transition-colors"
             >
               The Wednesday Collective
-            </a> family of initiatives
-            </p>
+            </a>
           </div>
         </div>
       </footer>
