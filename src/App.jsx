@@ -41,6 +41,8 @@ function App() {
   const [managerEmail, setManagerEmail] = useState('')
   const [activeTab, setActiveTab] = useState('current') // 'current' or 'past'
   const [editingInvoice, setEditingInvoice] = useState(null)
+  const [taxRate, setTaxRate] = useState(20) // Default 20%
+  const [showTaxSettings, setShowTaxSettings] = useState(false)
   const [newHours, setNewHours] = useState({
     date: format(new Date(), 'yyyy-MM-dd'),
     hours: '',
@@ -524,7 +526,7 @@ Thanks!
     )
     
     const totalEarnings = paidInvoices.reduce((sum, inv) => sum + inv.totalAmount, 0)
-    const taxAmount = totalEarnings * 0.20
+    const taxAmount = totalEarnings * (taxRate / 100)
     
     return { totalEarnings, taxAmount }
   }
@@ -579,23 +581,23 @@ Thanks!
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Contractor Tracker App</h1>
-              <p className="text-gray-600">Track your hours, create invoices, and manage taxes</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Contractor Tracker App</h1>
+              <p className="text-gray-600 text-sm sm:text-base">Track your hours, create invoices, and manage taxes</p>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap gap-2 w-full sm:w-auto">
               <button
                 onClick={exportData}
-                className="btn-secondary flex items-center"
+                className="btn-secondary flex items-center text-sm"
                 title="Export Data"
               >
-                <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
-                Export
+                <ArrowDownTrayIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Export</span>
               </button>
-              <label className="btn-secondary flex items-center cursor-pointer">
-                <ArrowUpTrayIcon className="h-5 w-5 mr-2" />
-                Import
+              <label className="btn-secondary flex items-center cursor-pointer text-sm">
+                <ArrowUpTrayIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Import</span>
                 <input
                   type="file"
                   accept=".json"
@@ -605,11 +607,11 @@ Thanks!
               </label>
               <button
                 onClick={generatePDFReport}
-                className="btn-primary flex items-center"
+                className="btn-primary flex items-center text-sm"
                 title="Generate PDF Report"
               >
-                <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
-                Report
+                <DocumentArrowDownIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Report</span>
               </button>
             </div>
           </div>
@@ -618,9 +620,9 @@ Thanks!
         {/* Backup Reminder */}
         {showBackupReminder && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
-            <div className="flex items-center">
-              <ExclamationTriangleIcon className="h-6 w-6 text-yellow-600 mr-3" />
-              <div className="flex-1">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0">
+              <ExclamationTriangleIcon className="h-6 w-6 text-yellow-600 mr-3 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-medium text-yellow-800">Backup Reminder</h3>
                 <p className="text-sm text-yellow-700 mt-1">
                   {lastBackup 
@@ -629,7 +631,7 @@ Thanks!
                   }
                 </p>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
                 <button
                   onClick={() => setShowBackupReminder(false)}
                   className="text-sm text-yellow-600 hover:text-yellow-800"
@@ -648,13 +650,13 @@ Thanks!
         )}
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
           <div className="card">
             <div className="flex items-center">
-              <ClockIcon className="h-8 w-8 text-primary-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Hours</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <ClockIcon className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600 flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Total Hours</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">
                   {hours.reduce((sum, h) => sum + h.hours, 0).toFixed(1)}
                 </p>
               </div>
@@ -663,10 +665,10 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <CurrencyDollarIcon className="h-8 w-8 text-green-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Earnings</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <CurrencyDollarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Total Earnings</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">
                   ${hours.reduce((sum, h) => sum + h.total, 0).toFixed(2)}
                 </p>
               </div>
@@ -675,20 +677,21 @@ Thanks!
           
           <div className="card">
             <div className="flex items-center">
-              <DocumentTextIcon className="h-8 w-8 text-orange-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Pending Approval</p>
-                <p className="text-2xl font-bold text-gray-900">{pendingHours.length}</p>
+              <DocumentTextIcon className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600 flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Pending Approval</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{pendingHours.length}</p>
               </div>
             </div>
           </div>
           
-          <div className="card">
+          <div className="card cursor-pointer hover:bg-gray-50 transition-colors" onClick={() => setShowTaxSettings(true)}>
             <div className="flex items-center">
-              <CheckCircleIcon className="h-8 w-8 text-red-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Quarterly Taxes</p>
-                <p className="text-2xl font-bold text-gray-900">${taxAmount.toFixed(2)}</p>
+              <CheckCircleIcon className="h-6 w-6 sm:h-8 sm:w-8 text-red-600 flex-shrink-0" />
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Quarterly Taxes</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">${taxAmount.toFixed(2)}</p>
+                <p className="text-xs text-gray-500">Click to edit tax rate ({taxRate}%)</p>
               </div>
             </div>
           </div>
@@ -696,20 +699,20 @@ Thanks!
 
         {/* Client Management */}
         <div className="card mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-gray-900">Client Management</h2>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-3 sm:space-y-0">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Client Management</h2>
             <button
               onClick={() => setShowAddClient(!showAddClient)}
-              className="btn-primary flex items-center"
+              className="btn-primary flex items-center text-sm w-full sm:w-auto"
             >
-              <UserGroupIcon className="h-5 w-5 mr-2" />
+              <UserGroupIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
               Add Client
             </button>
           </div>
 
           {showAddClient && (
             <div className="bg-gray-50 p-4 rounded-lg mb-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
                   <input
@@ -730,7 +733,7 @@ Thanks!
                     placeholder="client@example.com"
                   />
                 </div>
-                <div className="md:col-span-2">
+                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
                   <textarea
                     value={newClient.address}
@@ -753,16 +756,16 @@ Thanks!
                   />
                 </div>
               </div>
-              <div className="flex justify-end space-x-3 mt-4">
+              <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
                 <button
                   onClick={() => setShowAddClient(false)}
-                  className="btn-secondary"
+                  className="btn-secondary text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={addClient}
-                  className="btn-primary"
+                  className="btn-primary text-sm"
                 >
                   Add Client
                 </button>
@@ -776,22 +779,22 @@ Thanks!
               <p className="text-gray-500 text-center py-8">No clients added yet. Add your first client!</p>
             ) : (
               clients.map(client => (
-                <div key={client.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-4">
-                      <BuildingOfficeIcon className="h-6 w-6 text-gray-400" />
-                      <div>
-                        <h3 className="font-medium text-gray-900">{client.name}</h3>
-                        <p className="text-sm text-gray-600">{client.email}</p>
+                <div key={client.id} className="flex items-center justify-between p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center space-x-2 sm:space-x-4">
+                      <BuildingOfficeIcon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400 flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-medium text-gray-900 text-sm sm:text-base truncate">{client.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">{client.email}</p>
                       </div>
-                      <span className="text-green-600 font-medium">${client.hourlyRate}/hr</span>
+                      <span className="text-green-600 font-medium text-sm sm:text-base flex-shrink-0">${client.hourlyRate}/hr</span>
                     </div>
                   </div>
                   <button
                     onClick={() => deleteClient(client.id)}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-600 hover:text-red-800 ml-2 flex-shrink-0"
                   >
-                    <TrashIcon className="h-5 w-5" />
+                    <TrashIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 </div>
               ))
@@ -801,8 +804,8 @@ Thanks!
 
         {/* Settings */}
         <div className="card mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Settings</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Settings</h2>
+          <div className="grid grid-cols-1 gap-6">
             <div>
               <h3 className="font-medium text-gray-900 mb-2">Default Hourly Rate</h3>
               <div className="flex items-center space-x-4">
@@ -833,54 +836,54 @@ Thanks!
 
         {/* Hours Management with Tabs */}
         <div className="card mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex space-x-4">
-              <h2 className="text-xl font-semibold text-gray-900">Hours Management</h2>
-              <div className="flex border border-gray-300 rounded-lg">
+          <div className="flex flex-col space-y-4 mb-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Hours Management</h2>
+              <div className="flex space-x-2 w-full sm:w-auto">
                 <button
-                  onClick={() => setActiveTab('current')}
-                  className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
-                    activeTab === 'current' 
-                      ? 'bg-primary-600 text-white' 
-                      : 'bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
+                  onClick={emailManager}
+                  className="btn-secondary flex items-center text-sm flex-1 sm:flex-none"
+                  title="Email Manager for Approval"
                 >
-                  Current Hours ({hours.filter(h => !h.invoiced).length})
+                  <EnvelopeIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Email Manager</span>
                 </button>
                 <button
-                  onClick={() => setActiveTab('past')}
-                  className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
-                    activeTab === 'past' 
-                      ? 'bg-primary-600 text-white' 
-                      : 'bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
+                  onClick={() => setShowAddHours(!showAddHours)}
+                  className="btn-primary flex items-center text-sm flex-1 sm:flex-none"
                 >
-                  Past Hours ({invoicedHours.length})
+                  <PlusIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                  Add Hours
                 </button>
               </div>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex border border-gray-300 rounded-lg w-full sm:w-auto">
               <button
-                onClick={emailManager}
-                className="btn-secondary flex items-center"
-                title="Email Manager for Approval"
+                onClick={() => setActiveTab('current')}
+                className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-l-lg ${
+                  activeTab === 'current' 
+                    ? 'bg-primary-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
               >
-                <EnvelopeIcon className="h-5 w-5 mr-2" />
-                Email Manager
+                Current ({hours.filter(h => !h.invoiced).length})
               </button>
               <button
-                onClick={() => setShowAddHours(!showAddHours)}
-                className="btn-primary flex items-center"
+                onClick={() => setActiveTab('past')}
+                className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-r-lg ${
+                  activeTab === 'past' 
+                    ? 'bg-primary-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
               >
-                <PlusIcon className="h-5 w-5 mr-2" />
-                Add Hours
+                Past ({invoicedHours.length})
               </button>
             </div>
           </div>
 
           {showAddHours && (
             <div className="bg-gray-50 p-4 rounded-lg mb-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
                   <input
@@ -930,7 +933,7 @@ Thanks!
                     disabled={newHours.clientId !== ''}
                   />
                 </div>
-                <div className="md:col-span-2">
+                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                   <input
                     type="text"
@@ -941,16 +944,16 @@ Thanks!
                   />
                 </div>
               </div>
-              <div className="flex justify-end space-x-3 mt-4">
+              <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
                 <button
                   onClick={() => setShowAddHours(false)}
-                  className="btn-secondary"
+                  className="btn-secondary text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={addHours}
-                  className="btn-primary"
+                  className="btn-primary text-sm"
                 >
                   Add Hours
                 </button>
@@ -965,17 +968,17 @@ Thanks!
                 <p className="text-gray-500 text-center py-8">No current hours. Add your first entry!</p>
               ) : (
                 hours.filter(h => !h.invoiced).map(hour => (
-                  <div key={hour.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-4">
-                        <span className="text-sm text-gray-500">{hour.date}</span>
-                        <span className="font-medium">{hour.hours}h</span>
-                        <span className="text-gray-700">{hour.description}</span>
-                        <span className="text-blue-600 text-sm">{getClientName(hour.clientId)}</span>
-                        <span className="text-green-600 font-medium">${hour.total.toFixed(2)}</span>
+                  <div key={hour.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-white border border-gray-200 rounded-lg space-y-2 sm:space-y-0">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-4">
+                        <span className="text-xs sm:text-sm text-gray-500">{hour.date}</span>
+                        <span className="font-medium text-sm sm:text-base">{hour.hours}h</span>
+                        <span className="text-gray-700 text-sm sm:text-base truncate">{hour.description}</span>
+                        <span className="text-blue-600 text-xs sm:text-sm">{getClientName(hour.clientId)}</span>
+                        <span className="text-green-600 font-medium text-sm sm:text-base">${hour.total.toFixed(2)}</span>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
                       <span className={`px-2 py-1 text-xs rounded-full ${
                         hour.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                       }`}>
@@ -986,14 +989,14 @@ Thanks!
                           onClick={() => approveHours(hour.id)}
                           className="text-green-600 hover:text-green-800"
                         >
-                          <CheckCircleIcon className="h-5 w-5" />
+                          <CheckCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </button>
                       )}
                       <button
                         onClick={() => deleteHours(hour.id)}
                         className="text-red-600 hover:text-red-800"
                       >
-                        <TrashIcon className="h-5 w-5" />
+                        <TrashIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </button>
                     </div>
                   </div>
@@ -1004,18 +1007,18 @@ Thanks!
                 <p className="text-gray-500 text-center py-8">No past hours. Create invoices to see them here.</p>
               ) : (
                 invoicedHours.map(hour => (
-                  <div key={hour.id} className="flex items-center justify-between p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-4">
-                        <ArchiveBoxIcon className="h-5 w-5 text-gray-400" />
-                        <span className="text-sm text-gray-500">{hour.date}</span>
-                        <span className="font-medium">{hour.hours}h</span>
-                        <span className="text-gray-700">{hour.description}</span>
-                        <span className="text-blue-600 text-sm">{getClientName(hour.clientId)}</span>
-                        <span className="text-green-600 font-medium">${hour.total.toFixed(2)}</span>
+                  <div key={hour.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg space-y-2 sm:space-y-0">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-4">
+                        <ArchiveBoxIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-gray-500">{hour.date}</span>
+                        <span className="font-medium text-sm sm:text-base">{hour.hours}h</span>
+                        <span className="text-gray-700 text-sm sm:text-base truncate">{hour.description}</span>
+                        <span className="text-blue-600 text-xs sm:text-sm">{getClientName(hour.clientId)}</span>
+                        <span className="text-green-600 font-medium text-sm sm:text-base">${hour.total.toFixed(2)}</span>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
                       <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">
                         Invoiced
                       </span>
@@ -1029,14 +1032,14 @@ Thanks!
 
         {/* Invoice Management */}
         <div className="card mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-gray-900">Invoice Management</h2>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-3 sm:space-y-0">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Invoice Management</h2>
             {approvedHours.length > 0 && (
               <button
                 onClick={() => setShowCreateInvoice(!showCreateInvoice)}
-                className="btn-primary flex items-center"
+                className="btn-primary flex items-center text-sm w-full sm:w-auto"
               >
-                <DocumentTextIcon className="h-5 w-5 mr-2" />
+                <DocumentTextIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
                 Create Invoice
               </button>
             )}
@@ -1072,19 +1075,19 @@ Thanks!
               <p className="text-gray-500 text-center py-8">No invoices created yet.</p>
             ) : (
               invoices.map(invoice => (
-                <div key={invoice.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                                <div key={invoice.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                   {/* Invoice Header */}
-                  <div className="flex items-center justify-between p-4">
-                                      <div className="flex-1">
-                    <div className="flex items-center space-x-4">
-                      <span className="text-sm text-gray-500">Invoice #{invoice.invoiceNumber || invoice.id}</span>
-                      <span className="text-sm text-gray-500">{invoice.date}</span>
-                      <span className="font-medium">{invoice.totalHours}h</span>
-                      <span className="text-blue-600 text-sm">{invoice.clientName}</span>
-                      <span className="text-green-600 font-medium">${invoice.totalAmount.toFixed(2)}</span>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 space-y-2 sm:space-y-0">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-4">
+                        <span className="text-xs sm:text-sm text-gray-500">Invoice #{invoice.invoiceNumber || invoice.id}</span>
+                        <span className="text-xs sm:text-sm text-gray-500">{invoice.date}</span>
+                        <span className="font-medium text-sm sm:text-base">{invoice.totalHours}h</span>
+                        <span className="text-blue-600 text-xs sm:text-sm truncate">{invoice.clientName}</span>
+                        <span className="text-green-600 font-medium text-sm sm:text-base">${invoice.totalAmount.toFixed(2)}</span>
+                      </div>
                     </div>
-                  </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
                       <span className={`px-2 py-1 text-xs rounded-full ${
                         invoice.status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                       }`}>
@@ -1096,7 +1099,7 @@ Thanks!
                           className="text-green-600 hover:text-green-800"
                           title="Mark as Paid"
                         >
-                          <CheckCircleIcon className="h-5 w-5" />
+                          <CheckCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </button>
                       )}
                       <button
@@ -1104,14 +1107,14 @@ Thanks!
                         className="text-gray-600 hover:text-gray-800"
                         title="Edit Invoice"
                       >
-                        <PencilIcon className="h-5 w-5" />
+                        <PencilIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </button>
                       <button
                         onClick={() => generatePDFInvoice(invoice)}
                         className="text-blue-600 hover:text-blue-800"
                         title="Download PDF Invoice"
                       >
-                        <DocumentArrowDownIcon className="h-5 w-5" />
+                        <DocumentArrowDownIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </button>
                     </div>
                   </div>
@@ -1193,28 +1196,37 @@ Thanks!
 
         {/* Tax Summary */}
         <div className="card">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Quarterly Tax Summary</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Quarterly Tax Summary</h2>
+            <button
+              onClick={() => setShowTaxSettings(true)}
+              className="btn-secondary flex items-center text-sm"
+            >
+              <PencilIcon className="h-4 w-4 mr-1" />
+              Edit Tax Rate
+            </button>
+          </div>
+          <div className="grid grid-cols-1 gap-6">
             <div>
               <h3 className="font-medium text-gray-900 mb-2">Current Quarter</h3>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Total Earnings:</span>
-                  <span className="font-medium">${totalEarnings.toFixed(2)}</span>
+                  <span className="text-gray-600 text-sm sm:text-base">Total Earnings:</span>
+                  <span className="font-medium text-sm sm:text-base">${totalEarnings.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Taxes (20%):</span>
-                  <span className="font-medium text-red-600">${taxAmount.toFixed(2)}</span>
+                  <span className="text-gray-600 text-sm sm:text-base">Taxes ({taxRate}%):</span>
+                  <span className="font-medium text-red-600 text-sm sm:text-base">${taxAmount.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between border-t pt-2">
-                  <span className="text-gray-900 font-medium">Net Income:</span>
-                  <span className="font-medium text-green-600">${(totalEarnings - taxAmount).toFixed(2)}</span>
+                  <span className="text-gray-900 font-medium text-sm sm:text-base">Net Income:</span>
+                  <span className="font-medium text-green-600 text-sm sm:text-base">${(totalEarnings - taxAmount).toFixed(2)}</span>
                 </div>
               </div>
             </div>
             <div>
               <h3 className="font-medium text-gray-900 mb-2">Tax Due Dates</h3>
-              <div className="text-sm text-gray-600 space-y-1">
+              <div className="text-xs sm:text-sm text-gray-600 space-y-1">
                 <p>Q1: April 15</p>
                 <p>Q2: June 15</p>
                 <p>Q3: September 15</p>
@@ -1223,6 +1235,77 @@ Thanks!
             </div>
           </div>
         </div>
+
+        {/* Tax Settings Modal */}
+        {showTaxSettings && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg p-6 max-w-md w-full">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Tax Settings</h3>
+                <button
+                  onClick={() => setShowTaxSettings(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <XMarkIcon className="h-6 w-6" />
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Tax Rate (%)
+                  </label>
+                  <input
+                    type="number"
+                    value={taxRate}
+                    onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
+                    className="input-field w-full"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    placeholder="20"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Enter your estimated tax rate (e.g., 20 for 20%)
+                  </p>
+                </div>
+                
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-medium text-gray-900 mb-2">Preview</h4>
+                  <div className="space-y-1 text-sm">
+                    <div className="flex justify-between">
+                      <span>Total Earnings:</span>
+                      <span>${totalEarnings.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Tax Rate:</span>
+                      <span>{taxRate}%</span>
+                    </div>
+                    <div className="flex justify-between font-medium">
+                      <span>Estimated Tax:</span>
+                      <span className="text-red-600">${(totalEarnings * (taxRate / 100)).toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex justify-end space-x-3 mt-6">
+                <button
+                  onClick={() => setShowTaxSettings(false)}
+                  className="btn-secondary text-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => setShowTaxSettings(false)}
+                  className="btn-primary text-sm"
+                >
+                  Save Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
